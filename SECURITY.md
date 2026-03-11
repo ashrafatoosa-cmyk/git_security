@@ -1,12 +1,5 @@
 # Security Policy
 
-## Supported Versions
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 1.0.0   | :white_check_mark: |
-| < 1.0   | :x:                |
-
 ## Reporting a Vulnerability
 
 Please report any security vulnerabilities by opening an issue or contacting the repository owner.
@@ -22,6 +15,12 @@ To maintain the security of the project, the following sensitive data should **n
 - **Personally Identifiable Information (PII)**: User names, email addresses, phone numbers, or any compliance-related data (e.g., HIPAA, GDPR).
 
 If your code requires these variables, use environment variables or a secure secrets manager.
+
+### Environment Variables and `.env` Files
+Proper management of configuration is critical:
+- **Never Commit `.env` Files**: By design, `.env` files contain sensitive credentials meant solely for your local environment or specific deployment servers. Adding a `.env` file to `.gitignore` ensures it never accidentally enters the source repository.
+- **Use `.env.example`**: Instead of committing `.env`, commit a `.env.example` or `.env.template` file containing the *names* of the required environment variables (without the actual secret values). This shows other developers what variables they need to configure the project.
+- **Secret Managers for Production**: In production environments, prefer dedicated secret management solutions (like AWS Secrets Manager, HashiCorp Vault, or GitHub Secrets) over flat files.
 
 ### The Risks of Committing Secrets
 Committing secrets to a git repository, even briefly, can lead to severe consequences:
